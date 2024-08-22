@@ -17,9 +17,9 @@ const App: React.FC = () => {
       <Drawer
         variant="permanent"
         anchor="left"
-        sx={{ width: 240, flexShrink: 0 }}
+        sx={{ width: 200, flexShrink: 0 }}
       >
-        <Box sx={{ width: "200px", padding: 2 }}>
+        <Box sx={{ width: "200px", padding: 0 }}>
           <Typography variant="h6" noWrap>
             Navigation
           </Typography>
