@@ -6,6 +6,7 @@ import {
   refreshTokenService,
 } from "../services/authService";
 import { AuthContextType, UserType } from "../types";
+import { AUTH_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../constants/constants";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -17,11 +18,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     const initAuth = async () => {
-      const authToken = localStorage.getItem("authToken");
-      const refreshToken = localStorage.getItem("refreshToken");
+      const authToken = localStorage.getItem(AUTH_TOKEN_KEY);
+      const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
 
       if (!authToken || !refreshToken) {
-        // If tokens are not available, skip the authentication process
         setLoading(false);
         return;
       }
