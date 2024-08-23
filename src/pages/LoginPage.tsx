@@ -34,6 +34,8 @@ const LoginPage: React.FC = () => {
         <TextField
           label="Username"
           variant="outlined"
+          name="username"
+          type="text"
           fullWidth
           margin="normal"
           value={username}
@@ -44,6 +46,7 @@ const LoginPage: React.FC = () => {
           variant="outlined"
           fullWidth
           margin="normal"
+          name="password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
