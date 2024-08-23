@@ -1,11 +1,13 @@
 import axios from "axios";
-import { AUTH_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../constants/constants";
-
-const API_URL = import.meta.env.VITE_SERVER_BASE_URL;
+import {
+  AUTH_TOKEN_KEY,
+  REFRESH_TOKEN_KEY,
+  SERVER_BASE_URL,
+} from "../constants/constants";
 
 export const loginService = async (username: string, password: string) => {
   try {
-    const response = await axios.post(`${API_URL}/login`, {
+    const response = await axios.post(`${SERVER_BASE_URL}/login`, {
       username,
       password,
       expiresInMins: 1,
@@ -31,7 +33,7 @@ export const loginService = async (username: string, password: string) => {
 export const meService = async () => {
   try {
     const token = localStorage.getItem(AUTH_TOKEN_KEY);
-    const response = await axios.get(`${API_URL}/me`, {
+    const response = await axios.get(`${SERVER_BASE_URL}/me`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -53,7 +55,7 @@ export const meService = async () => {
 export const refreshTokenService = async () => {
   try {
     const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
-    const response = await axios.post(`${API_URL}/refresh`, {
+    const response = await axios.post(`${SERVER_BASE_URL}/refresh`, {
       refreshToken,
       expiresInMins: 1,
     });
