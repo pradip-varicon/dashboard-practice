@@ -5,7 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import ErrorPage from "./pages/ErrorPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
-import AppLayout from "./pages/AppLayout";
+import AppLayout from "./layout/AppLayout";
 import Dashboard from "./pages/Dashboard";
 
 const router = createBrowserRouter([
