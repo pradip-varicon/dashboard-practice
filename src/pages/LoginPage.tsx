@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { Button, TextField, Container, Typography } from "@mui/material";
 import { loginService } from "../services/authService";
+import { notifySuccess, notifyError } from "../utils/toastify";
 
 const LoginPage: React.FC = () => {
   const { setUser } = useAuth();
@@ -19,9 +20,10 @@ const LoginPage: React.FC = () => {
     e.preventDefault();
     try {
       await login(username, password);
+      notifySuccess("Logged in successfully");
       navigate("/");
     } catch {
-      alert("Login failed");
+      notifyError("Login failed");
     }
   };
 
