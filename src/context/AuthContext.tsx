@@ -1,10 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import {
-  loginService,
-  logoutService,
-  meService,
-  refreshTokenService,
-} from "../services/authService";
+import { meService, refreshTokenService } from "../services/authService";
 import { AuthContextType, UserType } from "../types";
 import { AUTH_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../constants/constants";
 
@@ -46,18 +41,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     initAuth();
   }, []);
 
-  const login = async (username: string, password: string) => {
-    const userData = await loginService(username, password);
-    setUser(userData);
-  };
-
-  const logout = async () => {
-    await logoutService();
-    setUser(null);
-  };
-
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, setUser, loading }}>
       {children}
     </AuthContext.Provider>
   );

@@ -2,12 +2,18 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { Button, TextField, Container, Typography } from "@mui/material";
+import { loginService } from "../services/authService";
 
 const LoginPage: React.FC = () => {
-  const { login } = useAuth();
+  const { setUser } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  const login = async (username: string, password: string) => {
+    const userData = await loginService(username, password);
+    setUser(userData);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

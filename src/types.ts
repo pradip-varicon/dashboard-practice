@@ -6,7 +6,6 @@ export interface UserType {
 
 export interface AuthContextType {
   user: UserType | null;
-  login: (username: string, password: string) => Promise<void>;
-  logout: () => Promise<void>;
+  setUser: React.Dispatch<React.SetStateAction<UserType | null>>;
   loading: boolean;
 }
