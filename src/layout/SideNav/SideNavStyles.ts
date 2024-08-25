@@ -23,7 +23,7 @@ export const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-export const LogoContainer = styled(Box)(({ theme }) => ({
+export const LogoContainer = styled(Box)(() => ({
   display: "flex",
   alignItems: "center",
 }));
