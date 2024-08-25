@@ -56,11 +56,7 @@ const SideNav: React.FC = () => {
     setSelectedIndex(getSelectedIndex());
   }, [location.pathname]);
 
-  const handleListItemClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: number,
-    path: string
-  ) => {
+  const handleListItemClick = (index: number, path: string) => {
     setSelectedIndex(index);
     navigate(path);
   };
