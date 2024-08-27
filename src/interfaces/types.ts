@@ -2,6 +2,8 @@ export interface UserType {
   token: string;
   refreshToken: string;
   username: string;
+  firstName: string;
+  lastName: string;
 }
 
 export interface AuthContextType {

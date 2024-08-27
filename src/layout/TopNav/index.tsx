@@ -4,9 +4,11 @@ import HelpIcon from "@mui/icons-material/Help";
 import UserIcon from "@mui/icons-material/People";
 import { useLocation } from "react-router-dom";
 import { StyledAppBar, StyledToolbar } from "./TopNavStyles";
+import { useAuth } from "../../context/AuthContext";
 
 const TopNav: React.FC = () => {
   const location = useLocation();
+  const { user } = useAuth();
 
   const headings: { [key: string]: string } = {
     "/dashboard": "Dashboard",
@@ -37,7 +39,7 @@ const TopNav: React.FC = () => {
         <IconButton color="inherit">
           <UserIcon />
           <Typography variant="body1" sx={{ marginLeft: 1 }}>
-            Pradip Singh
+            {user?.firstName + " " + user?.lastName || ""}
           </Typography>
         </IconButton>
       </StyledToolbar>
