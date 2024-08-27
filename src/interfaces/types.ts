@@ -8,4 +8,5 @@ export interface AuthContextType {
   user: UserType | null;
   setUser: React.Dispatch<React.SetStateAction<UserType | null>>;
   loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
