@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography, Box, IconButton } from "@mui/material";
 import HelpIcon from "@mui/icons-material/Help";
-import UserIcon from "@mui/icons-material/People";
+import PersonIcon from "@mui/icons-material/Person";
 import { useLocation } from "react-router-dom";
 import { StyledAppBar, StyledToolbar } from "./TopNavStyles";
 import { useAuth } from "../../context/AuthContext";
@@ -37,7 +37,7 @@ const TopNav: React.FC = () => {
           <HelpIcon />
         </IconButton>
         <IconButton color="inherit">
-          <UserIcon />
+          <PersonIcon fontSize="large" />
           <Typography variant="body1" sx={{ marginLeft: 1 }}>
             {user?.firstName + " " + user?.lastName || ""}
           </Typography>
