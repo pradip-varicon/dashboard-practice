@@ -70,7 +70,7 @@ const SideNav: React.FC = () => {
     <StyledDrawer variant="permanent">
       <StyledToolbar>
         <LogoContainer>
-          <img src="small-icon.png" alt="Company Logo" height="40" />
+          <img src="logo5.png" alt="Company Logo" height="40" />
         </LogoContainer>
         <MenuIcon />
       </StyledToolbar>
