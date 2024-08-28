@@ -26,7 +26,7 @@ const TopNav: React.FC = () => {
         <IconButton color="inherit">
           <PersonIcon fontSize="large" />
           <Typography variant="body1" sx={{ marginLeft: 1 }}>
-            {user?.firstName + " " + user?.lastName || ""}
+            {user?.firstName ?? ""} {user?.lastName ?? ""}
           </Typography>
         </IconButton>
       </StyledToolbar>
