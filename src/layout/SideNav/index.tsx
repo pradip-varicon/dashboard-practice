@@ -124,7 +124,7 @@ const SideNav: React.FC = () => {
       </StyledToolbar>
 
       <List component="nav" aria-label="main navigation">
-        {navItems.map(({ text, icon, path, subNav }, index) => (
+        {navItems.map(({ text, icon, subNav }, index) => (
           <React.Fragment key={text}>
             <ListItemStyled
               selected={selectedIndex === index && selectedSubIndex === null}
