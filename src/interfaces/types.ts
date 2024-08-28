@@ -2,8 +2,10 @@ export interface UserType {
   token: string;
   refreshToken: string;
   username: string;
+  email: string;
   firstName: string;
   lastName: string;
+  image: string;
 }
 
 export interface AuthContextType {

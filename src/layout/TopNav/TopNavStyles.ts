@@ -5,12 +5,12 @@ import { drawerWidth } from "../constants";
 
 export const StyledAppBar = styled(AppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
-  marginLeft: 240,
+  marginLeft: drawerWidth,
   width: `calc(100% - ${drawerWidth}px)`,
-  backgroundColor: "#ffffff",
-  color: "#002e5d",
+  backgroundColor: theme.palette.background.paper,
+  color: theme.palette.secondary.dark,
   boxShadow: "none",
-  borderBottom: "1px solid #ddd",
+  borderBottom: `1px solid ${theme.palette.divider}`,
 }));
 
 export const StyledToolbar = styled(Toolbar)({
