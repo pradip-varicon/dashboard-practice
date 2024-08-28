@@ -1,4 +1,8 @@
-export const drawerWidth = 240;
+import { DrawerWidth, LogoSrc } from "../Interfaces/types";
+
+export const drawerWidth: DrawerWidth = 240;
+
+export const logoSrc: LogoSrc = "/logo5.png";
 
 export const headings: { [key: string]: string } = {
   "/dashboard": "Dashboard",
@@ -19,5 +23,3 @@ export const headings: { [key: string]: string } = {
   "/settings/segments": "Segments",
   "/settings/organization": "Organization",
 };
-
-export const logoSrc = "/logo5.png";
