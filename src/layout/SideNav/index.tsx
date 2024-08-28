@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   List,
   ListItemIcon,
@@ -20,7 +20,6 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import MenuIcon from "@mui/icons-material/Menu";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import { useLocation, useNavigate } from "react-router-dom";
 import {
   StyledDrawer,
   StyledToolbar,
@@ -28,91 +27,49 @@ import {
   ListItemStyled,
 } from "./SideNavStyles";
 import { logoSrc } from "../constants";
+import { useSideNav } from "../hooks/useSideNav";
+
+const navItems = [
+  { text: "Dashboard", icon: <DashboardIcon />, path: "/dashboard" },
+  { text: "Projects", icon: <ProjectsIcon />, path: "/projects" },
+  { text: "Timesheet", icon: <TimesheetIcon />, path: "/timesheet" },
+  {
+    text: "Purchase Order",
+    icon: <PurchaseOrderIcon />,
+    path: "/purchase-order",
+  },
+  { text: "Delivery Docket", icon: <DocketIcon />, path: "/delivery-docket" },
+  { text: "Forms", icon: <FormsIcon />, path: "/forms" },
+  { text: "Equipment", icon: <EquipmentIcon />, path: "/equipment" },
+  {
+    text: "Resource Assigner",
+    icon: <ResourceIcon />,
+    path: "/resource-assigner",
+  },
+  { text: "File Manager", icon: <FileManagerIcon />, path: "/file-manager" },
+  { text: "User Management", icon: <UserIcon />, path: "/user-management" },
+  {
+    text: "Settings",
+    icon: <SettingsIcon />,
+    subNav: [
+      { text: "Allowance", path: "/settings/allowance" },
+      { text: "Categories", path: "/settings/categories" },
+      { text: "Accounting Codes", path: "/settings/accounting-codes" },
+      { text: "Resource Cost Sheet", path: "/settings/resource-cost-sheet" },
+      { text: "Segments", path: "/settings/segments" },
+      { text: "Organization", path: "/settings/organization" },
+    ],
+  },
+];
 
 const SideNav: React.FC = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const [selectedSubIndex, setSelectedSubIndex] = useState<number | null>(null);
-
-  const navItems = [
-    { text: "Dashboard", icon: <DashboardIcon />, path: "/dashboard" },
-    { text: "Projects", icon: <ProjectsIcon />, path: "/projects" },
-    { text: "Timesheet", icon: <TimesheetIcon />, path: "/timesheet" },
-    {
-      text: "Purchase Order",
-      icon: <PurchaseOrderIcon />,
-      path: "/purchase-order",
-    },
-    { text: "Delivery Docket", icon: <DocketIcon />, path: "/delivery-docket" },
-    { text: "Forms", icon: <FormsIcon />, path: "/forms" },
-    { text: "Equipment", icon: <EquipmentIcon />, path: "/equipment" },
-    {
-      text: "Resource Assigner",
-      icon: <ResourceIcon />,
-      path: "/resource-assigner",
-    },
-    { text: "File Manager", icon: <FileManagerIcon />, path: "/file-manager" },
-    { text: "User Management", icon: <UserIcon />, path: "/user-management" },
-    {
-      text: "Settings",
-      icon: <SettingsIcon />,
-      subNav: [
-        { text: "Allowance", path: "/settings/allowance" },
-        { text: "Categories", path: "/settings/categories" },
-        { text: "Accounting Codes", path: "/settings/accounting-codes" },
-        { text: "Resource Cost Sheet", path: "/settings/resource-cost-sheet" },
-        { text: "Segments", path: "/settings/segments" },
-        { text: "Organization", path: "/settings/organization" },
-      ],
-    },
-  ];
-
-  const initializeSelection = () => {
-    const mainIndex = navItems.findIndex((item) =>
-      location.pathname.startsWith(item.path ?? "")
-    );
-
-    if (mainIndex !== -1) {
-      setSelectedIndex(mainIndex);
-
-      if (navItems[mainIndex].subNav) {
-        const subIndex = navItems[mainIndex].subNav.findIndex(
-          (subItem) => subItem.path === location.pathname
-        );
-        if (subIndex !== -1) {
-          setSelectedSubIndex(subIndex);
-          setOpen(true);
-        } else {
-          setOpen(false);
-        }
-      } else {
-        setSelectedSubIndex(null);
-        setOpen(false);
-      }
-    }
-  };
-
-  useEffect(() => {
-    initializeSelection();
-  }, [location.pathname]);
-
-  const handleClick = (index: number) => {
-    setSelectedIndex(index);
-    setSelectedSubIndex(null);
-    if (navItems[index].subNav) {
-      setOpen(!open);
-    } else {
-      setOpen(false);
-      navigate(navItems[index].path ?? "");
-    }
-  };
-
-  const handleSubItemClick = (path: string, subIndex: number) => {
-    setSelectedSubIndex(subIndex);
-    navigate(path);
-  };
+  const {
+    open,
+    selectedIndex,
+    selectedSubIndex,
+    handleClick,
+    handleSubItemClick,
+  } = useSideNav(navItems);
 
   return (
     <StyledDrawer variant="permanent">
