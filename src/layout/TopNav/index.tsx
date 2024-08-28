@@ -5,24 +5,11 @@ import PersonIcon from "@mui/icons-material/Person";
 import { useLocation } from "react-router-dom";
 import { StyledAppBar, StyledToolbar } from "./TopNavStyles";
 import { useAuth } from "../../context/AuthContext";
+import { headings } from "../constants";
 
 const TopNav: React.FC = () => {
   const location = useLocation();
   const { user } = useAuth();
-
-  const headings: { [key: string]: string } = {
-    "/dashboard": "Dashboard",
-    "/projects": "Projects",
-    "/timesheet": "Timesheet",
-    "/purchase-order": "Purchase Order",
-    "/delivery-docket": "Delivery Docket",
-    "/forms": "Forms",
-    "/equipment": "Equipment",
-    "/resource-assigner": "Resource Assigner",
-    "/file-manager": "File Manager",
-    "/user-management": "User Management",
-    "/settings": "Settings",
-  };
 
   const currentHeading = headings[location.pathname] || "Projects";
 

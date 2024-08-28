@@ -19,6 +19,7 @@ import {
   LogoContainer,
   ListItemStyled,
 } from "./SideNavStyles";
+import { logoSrc } from "../constants";
 
 const SideNav: React.FC = () => {
   const location = useLocation();
@@ -70,7 +71,7 @@ const SideNav: React.FC = () => {
     <StyledDrawer variant="permanent">
       <StyledToolbar>
         <LogoContainer>
-          <img src="logo5.png" alt="Company Logo" height="40" />
+          <img src={logoSrc} alt="Company Logo" height="40" />
         </LogoContainer>
         <MenuIcon />
       </StyledToolbar>
