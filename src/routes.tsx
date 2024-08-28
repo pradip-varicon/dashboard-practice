@@ -8,7 +8,9 @@ import ErrorPage from "./pages/ErrorPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
 import AppLayout from "./layout/AppLayout";
-import Dashboard from "./pages/Dashboard";
+import DemoPage from "./pages/DemoPage";
+import SettingsLayout from "./layout/SettingsLayout";
+import AccountingCodes from "./pages/AccountingCodes";
 
 const router = createBrowserRouter([
   {
@@ -23,17 +25,28 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Navigate to="projects" replace /> },
-      { path: "dashboard", element: <Dashboard /> },
-      { path: "projects", element: <Dashboard /> },
-      { path: "timesheet", element: <Dashboard /> },
-      { path: "purchase-order", element: <Dashboard /> },
-      { path: "delivery-docket", element: <Dashboard /> },
-      { path: "forms", element: <Dashboard /> },
-      { path: "equipment", element: <Dashboard /> },
-      { path: "resource-assigner", element: <Dashboard /> },
-      { path: "file-manager", element: <Dashboard /> },
-      { path: "user-management", element: <Dashboard /> },
-      { path: "settings", element: <Dashboard /> },
+      { path: "dashboard", element: <DemoPage /> },
+      { path: "projects", element: <DemoPage /> },
+      { path: "timesheet", element: <DemoPage /> },
+      { path: "purchase-order", element: <DemoPage /> },
+      { path: "delivery-docket", element: <DemoPage /> },
+      { path: "forms", element: <DemoPage /> },
+      { path: "equipment", element: <DemoPage /> },
+      { path: "resource-assigner", element: <DemoPage /> },
+      { path: "file-manager", element: <DemoPage /> },
+      { path: "user-management", element: <DemoPage /> },
+      {
+        path: "settings",
+        element: <SettingsLayout />,
+        children: [
+          { path: "allowance", element: <DemoPage /> },
+          { path: "categories", element: <DemoPage /> },
+          { path: "accounting-codes", element: <AccountingCodes /> },
+          { path: "resource-cost-sheet", element: <DemoPage /> },
+          { path: "segments", element: <DemoPage /> },
+          { path: "organization", element: <DemoPage /> },
+        ],
+      },
     ],
   },
   {

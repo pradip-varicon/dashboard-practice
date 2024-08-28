@@ -12,6 +12,12 @@ export const headings: { [key: string]: string } = {
   "/file-manager": "File Manager",
   "/user-management": "User Management",
   "/settings": "Settings",
+  "/settings/allowance": "Allowance",
+  "/settings/categories": "Categories",
+  "/settings/accounting-codes": "Accounting-Codes",
+  "/settings/resource-cost-sheet": "Resource Cost Sheet",
+  "/settings/segments": "Segments",
+  "/settings/organization": "Organization",
 };
 
-export const logoSrc = "logo5.png";
+export const logoSrc = "/logo5.png";

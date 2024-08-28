@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { List, ListItemIcon, ListItemText, Divider } from "@mui/material";
+import {
+  List,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+  Collapse,
+} from "@mui/material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ProjectsIcon from "@mui/icons-material/Work";
 import TimesheetIcon from "@mui/icons-material/AccessTime";
@@ -12,6 +18,8 @@ import FileManagerIcon from "@mui/icons-material/Folder";
 import UserIcon from "@mui/icons-material/People";
 import SettingsIcon from "@mui/icons-material/Settings";
 import MenuIcon from "@mui/icons-material/Menu";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   StyledDrawer,
@@ -24,6 +32,9 @@ import { logoSrc } from "../constants";
 const SideNav: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [selectedSubIndex, setSelectedSubIndex] = useState<number | null>(null);
 
   const navItems = [
     { text: "Dashboard", icon: <DashboardIcon />, path: "/dashboard" },
@@ -44,26 +55,62 @@ const SideNav: React.FC = () => {
     },
     { text: "File Manager", icon: <FileManagerIcon />, path: "/file-manager" },
     { text: "User Management", icon: <UserIcon />, path: "/user-management" },
-    { text: "Settings", icon: <SettingsIcon />, path: "/settings" },
+    {
+      text: "Settings",
+      icon: <SettingsIcon />,
+      subNav: [
+        { text: "Allowance", path: "/settings/allowance" },
+        { text: "Categories", path: "/settings/categories" },
+        { text: "Accounting Codes", path: "/settings/accounting-codes" },
+        { text: "Resource Cost Sheet", path: "/settings/resource-cost-sheet" },
+        { text: "Segments", path: "/settings/segments" },
+        { text: "Organization", path: "/settings/organization" },
+      ],
+    },
   ];
 
-  const getSelectedIndex = () => {
-    return navItems.findIndex((item) => item.path === location.pathname);
+  const initializeSelection = () => {
+    const mainIndex = navItems.findIndex((item) =>
+      location.pathname.startsWith(item.path ?? "")
+    );
+
+    if (mainIndex !== -1) {
+      setSelectedIndex(mainIndex);
+
+      if (navItems[mainIndex].subNav) {
+        const subIndex = navItems[mainIndex].subNav.findIndex(
+          (subItem) => subItem.path === location.pathname
+        );
+        if (subIndex !== -1) {
+          setSelectedSubIndex(subIndex);
+          setOpen(true);
+        } else {
+          setOpen(false);
+        }
+      } else {
+        setSelectedSubIndex(null);
+        setOpen(false);
+      }
+    }
   };
 
-  const [selectedIndex, setSelectedIndex] = useState(getSelectedIndex());
-
   useEffect(() => {
-    setSelectedIndex(getSelectedIndex());
+    initializeSelection();
   }, [location.pathname]);
 
-  const handleListItemClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: number,
-    path: string
-  ) => {
-    event.preventDefault();
+  const handleClick = (index: number) => {
     setSelectedIndex(index);
+    setSelectedSubIndex(null);
+    if (navItems[index].subNav) {
+      setOpen(!open);
+    } else {
+      setOpen(false);
+      navigate(navItems[index].path ?? "");
+    }
+  };
+
+  const handleSubItemClick = (path: string, subIndex: number) => {
+    setSelectedSubIndex(subIndex);
     navigate(path);
   };
 
@@ -75,16 +122,37 @@ const SideNav: React.FC = () => {
         </LogoContainer>
         <MenuIcon />
       </StyledToolbar>
+
       <List component="nav" aria-label="main navigation">
-        {navItems.map(({ text, icon, path }, index) => (
-          <ListItemStyled
-            key={text}
-            selected={selectedIndex === index}
-            onClick={(event) => handleListItemClick(event, index, path)}
-          >
-            <ListItemIcon>{icon}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItemStyled>
+        {navItems.map(({ text, icon, path, subNav }, index) => (
+          <React.Fragment key={text}>
+            <ListItemStyled
+              selected={selectedIndex === index && selectedSubIndex === null}
+              onClick={() => handleClick(index)}
+            >
+              <ListItemIcon>{icon}</ListItemIcon>
+              <ListItemText primary={text} />
+              {subNav && (open ? <ExpandLess /> : <ExpandMore />)}
+            </ListItemStyled>
+            {subNav && (
+              <Collapse in={open} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  {subNav.map((subItem, subIndex) => (
+                    <ListItemStyled
+                      key={subItem.text}
+                      selected={selectedSubIndex === subIndex}
+                      onClick={() =>
+                        handleSubItemClick(subItem.path || "", subIndex)
+                      }
+                      sx={{ pl: 4 }}
+                    >
+                      <ListItemText primary={subItem.text} />
+                    </ListItemStyled>
+                  ))}
+                </List>
+              </Collapse>
+            )}
+          </React.Fragment>
         ))}
       </List>
       <Divider />
