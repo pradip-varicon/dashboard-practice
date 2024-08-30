@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { meService, refreshTokenService } from "../services/authService";
 import { AuthContextType, UserType } from "../interfaces/types";
-import { AUTH_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../constants/constants";
+import { AUTH_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../constants/authConstants";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 

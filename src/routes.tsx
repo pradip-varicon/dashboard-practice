@@ -11,6 +11,7 @@ import AppLayout from "./layout/AppLayout";
 import DemoPage from "./pages/DemoPage";
 import SettingsLayout from "./layout/SettingsLayout";
 import AccountingCodes from "./pages/AccountingCodes";
+import { AccountingProvider } from "./context/AccountingContext";
 
 const router = createBrowserRouter([
   {
@@ -41,7 +42,14 @@ const router = createBrowserRouter([
         children: [
           { path: "allowance", element: <DemoPage /> },
           { path: "categories", element: <DemoPage /> },
-          { path: "accounting-codes", element: <AccountingCodes /> },
+          {
+            path: "accounting-codes",
+            element: (
+              <AccountingProvider>
+                <AccountingCodes />
+              </AccountingProvider>
+            ),
+          },
           { path: "resource-cost-sheet", element: <DemoPage /> },
           { path: "segments", element: <DemoPage /> },
           { path: "organization", element: <DemoPage /> },
