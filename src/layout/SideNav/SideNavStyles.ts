@@ -3,13 +3,9 @@ import Drawer from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
 import ListItemButton from "@mui/material/ListItemButton";
-import { drawerWidth } from "../constants";
 
 export const StyledDrawer = styled(Drawer)(({ theme }) => ({
-  width: drawerWidth,
-  flexShrink: 0,
   "& .MuiDrawer-paper": {
-    width: 240,
     boxSizing: "border-box",
     backgroundColor: theme.palette.secondary.dark,
     color: theme.palette.primary.contrastText,

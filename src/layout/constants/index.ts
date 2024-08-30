@@ -1,6 +1,7 @@
-import { DrawerWidth, LogoSrc } from "../Interfaces/types";
+import { Width, LogoSrc } from "../Interfaces/types";
 
-export const drawerWidth: DrawerWidth = 240;
+export const drawerWidth: Width = 240;
+export const topWidth: Width = 64;
 
 export const logoSrc: LogoSrc = "/logo5.png";
 

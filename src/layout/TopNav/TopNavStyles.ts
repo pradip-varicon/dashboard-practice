@@ -5,7 +5,6 @@ import { drawerWidth } from "../constants";
 
 export const StyledAppBar = styled(AppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
-  marginLeft: drawerWidth,
   width: `calc(100% - ${drawerWidth}px)`,
   backgroundColor: theme.palette.background.paper,
   color: theme.palette.secondary.dark,
