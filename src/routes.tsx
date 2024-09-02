@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     ),
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <Navigate to="overview" replace /> },
+      { index: true, element: <Navigate to="suppliers" replace /> },
       { path: "overview", element: <DemoPage /> },
       { path: "sales-orders", element: <DemoPage /> },
       { path: "inventory", element: <DemoPage /> },
