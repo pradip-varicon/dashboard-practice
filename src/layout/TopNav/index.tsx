@@ -1,6 +1,5 @@
 import React from "react";
 import { Typography, Box, IconButton } from "@mui/material";
-import HelpIcon from "@mui/icons-material/Help";
 import PersonIcon from "@mui/icons-material/Person";
 import { useLocation } from "react-router-dom";
 import { StyledAppBar, StyledToolbar } from "./TopNavStyles";
@@ -20,9 +19,6 @@ const TopNav: React.FC = () => {
           {currentHeading}
         </Typography>
         <Box sx={{ flexGrow: 1 }} />
-        <IconButton color="inherit">
-          <HelpIcon />
-        </IconButton>
         <IconButton color="inherit">
           <PersonIcon fontSize="large" />
           <Typography variant="body1" sx={{ marginLeft: 1 }}>

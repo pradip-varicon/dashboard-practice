@@ -10,8 +10,8 @@ import { AuthProvider } from "./context/AuthContext";
 import AppLayout from "./layout/AppLayout";
 import DemoPage from "./pages/DemoPage";
 import SettingsLayout from "./layout/SettingsLayout";
-import AccountingCodes from "./pages/AccountingCodes";
-import { AccountingProvider } from "./context/AccountingContext";
+import Suppliers from "./pages/Suppliers";
+import { SuppliersProvider } from "./context/SuppliersContext";
 
 const router = createBrowserRouter([
   {
@@ -25,34 +25,33 @@ const router = createBrowserRouter([
     ),
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <Navigate to="projects" replace /> },
-      { path: "dashboard", element: <DemoPage /> },
-      { path: "projects", element: <DemoPage /> },
-      { path: "timesheet", element: <DemoPage /> },
-      { path: "purchase-order", element: <DemoPage /> },
-      { path: "delivery-docket", element: <DemoPage /> },
-      { path: "forms", element: <DemoPage /> },
-      { path: "equipment", element: <DemoPage /> },
-      { path: "resource-assigner", element: <DemoPage /> },
-      { path: "file-manager", element: <DemoPage /> },
-      { path: "user-management", element: <DemoPage /> },
+      { index: true, element: <Navigate to="overview" replace /> },
+      { path: "overview", element: <DemoPage /> },
+      { path: "sales-orders", element: <DemoPage /> },
+      { path: "inventory", element: <DemoPage /> },
+      {
+        path: "suppliers",
+        element: (
+          <SuppliersProvider>
+            <Suppliers />
+          </SuppliersProvider>
+        ),
+      },
+      { path: "purchase-orders", element: <DemoPage /> },
+      { path: "deliveries", element: <DemoPage /> },
+      { path: "customers", element: <DemoPage /> },
+      { path: "invoices", element: <DemoPage /> },
+      { path: "reports", element: <DemoPage /> },
+      { path: "analytics", element: <DemoPage /> },
       {
         path: "settings",
         element: <SettingsLayout />,
         children: [
-          { path: "allowance", element: <DemoPage /> },
-          { path: "categories", element: <DemoPage /> },
-          {
-            path: "accounting-codes",
-            element: (
-              <AccountingProvider>
-                <AccountingCodes />
-              </AccountingProvider>
-            ),
-          },
-          { path: "resource-cost-sheet", element: <DemoPage /> },
-          { path: "segments", element: <DemoPage /> },
-          { path: "organization", element: <DemoPage /> },
+          { path: "product-categories", element: <DemoPage /> },
+          { path: "user-roles", element: <DemoPage /> },
+          { path: "tax-settings", element: <DemoPage /> },
+          { path: "company-info", element: <DemoPage /> },
+          { path: "billing-invoices", element: <DemoPage /> },
         ],
       },
     ],
