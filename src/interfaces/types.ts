@@ -13,6 +13,7 @@ export interface AuthContextType {
   setUser: React.Dispatch<React.SetStateAction<UserType | null>>;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  logout: () => Promise<void>;
 }
 
 export interface RouteError {
