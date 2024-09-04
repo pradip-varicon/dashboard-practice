@@ -1,20 +1,24 @@
 import React from "react";
 import { Button, TextField, CircularProgress } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { LoginFormType } from "../../interfaces/authTypes";
+import { LoginFormType, loginSchema } from "../../interfaces/authTypes";
 import { loginService } from "../../services/authService";
 import { notifySuccess, notifyError } from "../../utils/toastify";
 
 const LoginForm: React.FC = () => {
   const { setUser } = useAuth();
   const navigate = useNavigate();
+
   const {
     control,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm<LoginFormType>();
+  } = useForm<LoginFormType>({
+    resolver: zodResolver(loginSchema),
+  });
 
   const onSubmit = async (data: LoginFormType) => {
     try {
@@ -33,7 +37,6 @@ const LoginForm: React.FC = () => {
         name="username"
         control={control}
         defaultValue=""
-        rules={{ required: "Username is required" }}
         render={({ field, fieldState: { error } }) => (
           <TextField
             {...field}
@@ -42,7 +45,7 @@ const LoginForm: React.FC = () => {
             fullWidth
             margin="normal"
             error={!!error}
-            helperText={error ? error.message : null}
+            helperText={error?.message}
           />
         )}
       />
@@ -50,7 +53,6 @@ const LoginForm: React.FC = () => {
         name="password"
         control={control}
         defaultValue=""
-        rules={{ required: "Password is required" }}
         render={({ field, fieldState: { error } }) => (
           <TextField
             {...field}
@@ -60,7 +62,7 @@ const LoginForm: React.FC = () => {
             fullWidth
             margin="normal"
             error={!!error}
-            helperText={error ? error.message : null}
+            helperText={error?.message}
           />
         )}
       />
