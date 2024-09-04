@@ -5,6 +5,6 @@ export interface NavItem {
   subNav?: { text: string; path: string }[];
 }
 
-export type DrawerWidth = number;
+export type Width = number;
 
 export type LogoSrc = string;

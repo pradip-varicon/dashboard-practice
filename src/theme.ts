@@ -3,20 +3,32 @@ import { createTheme } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#F29C1F",
-      light: "#F7C158",
-      dark: "#C77400",
+      main: "#E8083E",
+      light: "#F86A8D",
+      dark: "#C41C2A",
       contrastText: "#fff",
     },
     secondary: {
-      main: "#1A3A77",
-      light: "#4F6A9F",
-      dark: "#00204E",
+      main: "#02864A",
+      light: "#4CAF6F",
+      dark: "#015F31",
+      contrastText: "#fff",
+    },
+    success: {
+      main: "#66BB6A",
+      contrastText: "#fff",
+    },
+    error: {
+      main: "#F44336",
       contrastText: "#fff",
     },
     background: {
       default: "#f5f5f5",
       paper: "#ffffff",
+    },
+    text: {
+      primary: "#1C1A27",
+      secondary: "#7C7C7C",
     },
   },
   typography: {
@@ -31,7 +43,7 @@ const theme = createTheme({
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          backgroundColor: "#002e5d",
+          backgroundColor: "#1C1A27",
           color: "#fff",
           width: 240,
           "& .MuiListItemIcon-root": {
@@ -45,7 +57,7 @@ const theme = createTheme({
         root: {
           height: "40px",
           "&.Mui-selected": {
-            background: "linear-gradient(90deg, #F2700A 0%, #FAA33D 100%)",
+            background: "linear-gradient(90deg, #FF6F00 0%, #E8083E 100%)",
             color: "#fff",
           },
         },
@@ -54,7 +66,7 @@ const theme = createTheme({
     MuiDivider: {
       styleOverrides: {
         root: {
-          backgroundColor: "#4F6A9F",
+          backgroundColor: "#E0E0E0",
           margin: "0.5rem 0",
         },
       },

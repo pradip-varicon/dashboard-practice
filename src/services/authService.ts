@@ -3,7 +3,7 @@ import {
   AUTH_TOKEN_KEY,
   REFRESH_TOKEN_KEY,
   SERVER_BASE_URL,
-} from "../constants/constants";
+} from "../constants/authConstants";
 
 export const loginService = async (username: string, password: string) => {
   try {

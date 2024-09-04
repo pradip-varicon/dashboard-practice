@@ -3,16 +3,28 @@ import { CssBaseline } from "@mui/material";
 import SideNav from "../SideNav";
 import TopNav from "../TopNav";
 import MainContent from "../MainContent";
-import { AppContainer, MainContentContainer } from "./AppLayoutStyles";
+import {
+  AppContainer,
+  MainContentContainer,
+  StyledSideNav,
+  StyledMainContent,
+  TopNavContainer,
+} from "./AppLayoutStyles";
 
 const AppLayout: React.FC = () => {
   return (
     <AppContainer>
       <CssBaseline />
-      <SideNav />
-      <MainContentContainer>
+      <TopNavContainer>
         <TopNav />
-        <MainContent />
+      </TopNavContainer>
+      <MainContentContainer>
+        <StyledSideNav>
+          <SideNav />
+        </StyledSideNav>
+        <StyledMainContent>
+          <MainContent />
+        </StyledMainContent>
       </MainContentContainer>
     </AppContainer>
   );

@@ -6,16 +6,16 @@ import {
   Divider,
   Collapse,
 } from "@mui/material";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import ProjectsIcon from "@mui/icons-material/Work";
-import TimesheetIcon from "@mui/icons-material/AccessTime";
-import PurchaseOrderIcon from "@mui/icons-material/ShoppingCart";
-import DocketIcon from "@mui/icons-material/Receipt";
-import FormsIcon from "@mui/icons-material/Description";
-import EquipmentIcon from "@mui/icons-material/Build";
-import ResourceIcon from "@mui/icons-material/Assignment";
-import FileManagerIcon from "@mui/icons-material/Folder";
-import UserIcon from "@mui/icons-material/People";
+import DashboardIcon from "@mui/icons-material/Assessment";
+import SalesOrderIcon from "@mui/icons-material/ReceiptLong";
+import InventoryIcon from "@mui/icons-material/Inventory";
+import SuppliersIcon from "@mui/icons-material/Business";
+import PurchaseOrderIcon from "@mui/icons-material/ShoppingBag";
+import DeliveriesIcon from "@mui/icons-material/LocalMall";
+import CustomersIcon from "@mui/icons-material/PeopleOutline";
+import InvoicesIcon from "@mui/icons-material/Receipt";
+import ReportsIcon from "@mui/icons-material/BarChart";
+import AnalyticsIcon from "@mui/icons-material/Insights";
 import SettingsIcon from "@mui/icons-material/Settings";
 import MenuIcon from "@mui/icons-material/Menu";
 import ExpandLess from "@mui/icons-material/ExpandLess";
@@ -30,37 +30,33 @@ import { logoSrc } from "../constants";
 import { useSideNav } from "../hooks/useSideNav";
 
 const navItems = [
-  { text: "Dashboard", icon: <DashboardIcon />, path: "/dashboard" },
-  { text: "Projects", icon: <ProjectsIcon />, path: "/projects" },
-  { text: "Timesheet", icon: <TimesheetIcon />, path: "/timesheet" },
+  { text: "Overview", icon: <DashboardIcon />, path: "/overview" },
+  { text: "Sales Orders", icon: <SalesOrderIcon />, path: "/sales-orders" },
+  { text: "Inventory", icon: <InventoryIcon />, path: "/inventory" },
+  { text: "Suppliers", icon: <SuppliersIcon />, path: "/suppliers" },
   {
-    text: "Purchase Order",
+    text: "Purchase Orders",
     icon: <PurchaseOrderIcon />,
-    path: "/purchase-order",
+    path: "/purchase-orders",
   },
-  { text: "Delivery Docket", icon: <DocketIcon />, path: "/delivery-docket" },
-  { text: "Forms", icon: <FormsIcon />, path: "/forms" },
-  { text: "Equipment", icon: <EquipmentIcon />, path: "/equipment" },
-  {
-    text: "Resource Assigner",
-    icon: <ResourceIcon />,
-    path: "/resource-assigner",
-  },
-  { text: "File Manager", icon: <FileManagerIcon />, path: "/file-manager" },
-  { text: "User Management", icon: <UserIcon />, path: "/user-management" },
+  { text: "Deliveries", icon: <DeliveriesIcon />, path: "/deliveries" },
+  { text: "Customers", icon: <CustomersIcon />, path: "/customers" },
+  { text: "Invoices", icon: <InvoicesIcon />, path: "/invoices" },
+  { text: "Reports", icon: <ReportsIcon />, path: "/reports" },
+  { text: "Analytics", icon: <AnalyticsIcon />, path: "/analytics" },
   {
     text: "Settings",
     icon: <SettingsIcon />,
     subNav: [
-      { text: "Allowance", path: "/settings/allowance" },
-      { text: "Categories", path: "/settings/categories" },
-      { text: "Accounting Codes", path: "/settings/accounting-codes" },
-      { text: "Resource Cost Sheet", path: "/settings/resource-cost-sheet" },
-      { text: "Segments", path: "/settings/segments" },
-      { text: "Organization", path: "/settings/organization" },
+      { text: "Product Categories", path: "/settings/product-categories" },
+      { text: "User Roles", path: "/settings/user-roles" },
+      { text: "Tax Settings", path: "/settings/tax-settings" },
+      { text: "Company Information", path: "/settings/company-info" },
+      { text: "Billing & Invoices", path: "/settings/billing-invoices" },
     ],
   },
 ];
+
 
 const SideNav: React.FC = () => {
   const {

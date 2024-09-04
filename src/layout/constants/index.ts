@@ -1,25 +1,26 @@
-import { DrawerWidth, LogoSrc } from "../Interfaces/types";
+import { Width, LogoSrc } from "../Interfaces/types";
 
-export const drawerWidth: DrawerWidth = 240;
+export const drawerWidth: Width = 240;
+export const topWidth: Width = 64;
 
 export const logoSrc: LogoSrc = "/logo5.png";
 
 export const headings: { [key: string]: string } = {
-  "/dashboard": "Dashboard",
-  "/projects": "Projects",
-  "/timesheet": "Timesheet",
-  "/purchase-order": "Purchase Order",
-  "/delivery-docket": "Delivery Docket",
-  "/forms": "Forms",
-  "/equipment": "Equipment",
-  "/resource-assigner": "Resource Assigner",
-  "/file-manager": "File Manager",
-  "/user-management": "User Management",
+  "/overview": "Overview",
+  "/sales-orders": "Sales Orders",
+  "/inventory": "Inventory",
+  "/suppliers": "Suppliers",
+  "/purchase-orders": "Purchase Orders",
+  "/deliveries": "Deliveries",
+  "/customers": "Customers",
+  "/invoices": "Invoices",
+  "/reports": "Reports",
+  "/analytics": "Analytics",
   "/settings": "Settings",
-  "/settings/allowance": "Allowance",
-  "/settings/categories": "Categories",
-  "/settings/accounting-codes": "Accounting-Codes",
-  "/settings/resource-cost-sheet": "Resource Cost Sheet",
-  "/settings/segments": "Segments",
-  "/settings/organization": "Organization",
+  "/settings/product-categories": "Product Categories",
+  "/settings/user-roles": "User Roles",
+  "/settings/tax-settings": "Tax Settings",
+  "/settings/company-info": "Company Information",
+  "/settings/billing-invoices": "Billing & Invoices",
 };
+

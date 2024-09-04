@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { meService, refreshTokenService } from "../services/authService";
 import { AuthContextType, UserType } from "../interfaces/types";
-import { AUTH_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../constants/constants";
+import { AUTH_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../constants/authConstants";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -41,8 +41,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     initAuth();
   }, []);
 
+  const logout = async () => {
+    try {
+      localStorage.removeItem(AUTH_TOKEN_KEY);
+      localStorage.removeItem(REFRESH_TOKEN_KEY);
+      setUser(null);
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, setUser, loading, setLoading }}>
+    <AuthContext.Provider
+      value={{ user, setUser, loading, setLoading, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );
