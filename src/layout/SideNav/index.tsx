@@ -5,6 +5,7 @@ import {
   ListItemText,
   Divider,
   Collapse,
+  useMediaQuery,
 } from "@mui/material";
 import DashboardIcon from "@mui/icons-material/Assessment";
 import SalesOrderIcon from "@mui/icons-material/ReceiptLong";
@@ -17,7 +18,6 @@ import InvoicesIcon from "@mui/icons-material/Receipt";
 import ReportsIcon from "@mui/icons-material/BarChart";
 import AnalyticsIcon from "@mui/icons-material/Insights";
 import SettingsIcon from "@mui/icons-material/Settings";
-import MenuIcon from "@mui/icons-material/Menu";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import {
@@ -57,8 +57,7 @@ const navItems = [
   },
 ];
 
-
-const SideNav: React.FC = () => {
+const SideNav: React.FC<{ isSideNavOpen: boolean }> = ({ isSideNavOpen }) => {
   const {
     open,
     selectedIndex,
@@ -67,13 +66,16 @@ const SideNav: React.FC = () => {
     handleSubItemClick,
   } = useSideNav(navItems);
 
+  const isTablet = useMediaQuery((theme: any) =>
+    theme.breakpoints.between("sm", "md")
+  );
+
   return (
-    <StyledDrawer variant="permanent">
+    <StyledDrawer variant="permanent" isTablet={isTablet}>
       <StyledToolbar>
         <LogoContainer>
           <img src={logoSrc} alt="Company Logo" height="40" />
         </LogoContainer>
-        <MenuIcon />
       </StyledToolbar>
 
       <List component="nav" aria-label="main navigation">
@@ -84,7 +86,7 @@ const SideNav: React.FC = () => {
               onClick={() => handleClick(index)}
             >
               <ListItemIcon>{icon}</ListItemIcon>
-              <ListItemText primary={text} />
+              {isSideNavOpen && <ListItemText primary={text} />}
               {subNav && (open ? <ExpandLess /> : <ExpandMore />)}
             </ListItemStyled>
             {subNav && (

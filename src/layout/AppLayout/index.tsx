@@ -1,5 +1,5 @@
-import React from "react";
-import { CssBaseline } from "@mui/material";
+import React, { useState } from "react";
+import { CssBaseline, useMediaQuery } from "@mui/material";
 import SideNav from "../SideNav";
 import TopNav from "../TopNav";
 import MainContent from "../MainContent";
@@ -12,16 +12,28 @@ import {
 } from "./AppLayoutStyles";
 
 const AppLayout: React.FC = () => {
+  const [isSideNavOpen, setIsSideNavOpen] = useState(true);
+  const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery((theme: any) =>
+    theme.breakpoints.between("sm", "md")
+  );
+
+  const handleToggleSideNav = () => {
+    setIsSideNavOpen(!isSideNavOpen);
+  };
+
   return (
     <AppContainer>
       <CssBaseline />
       <TopNavContainer>
-        <TopNav />
+        <TopNav onToggleSideNav={handleToggleSideNav} />
       </TopNavContainer>
       <MainContentContainer>
-        <StyledSideNav>
-          <SideNav />
-        </StyledSideNav>
+        {(isMobile || isSideNavOpen) && (
+          <StyledSideNav isTablet={isTablet}>
+            <SideNav isSideNavOpen={isSideNavOpen} />
+          </StyledSideNav>
+        )}
         <StyledMainContent>
           <MainContent />
         </StyledMainContent>
