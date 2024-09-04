@@ -6,7 +6,7 @@ import {
 } from "material-react-table";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { mkConfig, generateCsv, download } from "export-to-csv";
-import { Supplier } from "../../interfaces/suppliersTypes";
+import { SupplierType } from "../../interfaces/suppliersTypes";
 
 const csvConfig = mkConfig({
   fieldSeparator: ",",
@@ -24,7 +24,7 @@ const columns = [
   { accessorKey: "Note", header: "Note", size: 250 },
 ];
 
-const AccountingTable = ({ data }: { data: Supplier[] }) => {
+const AccountingTable = ({ data }: { data: SupplierType[] }) => {
   const table = useMaterialReactTable({
     columns,
     data,
@@ -80,13 +80,13 @@ const AccountingTable = ({ data }: { data: Supplier[] }) => {
     ),
   });
 
-  const handleExportRows = (rows: MRT_Row<Supplier>[]) => {
+  const handleExportRows = (rows: MRT_Row<SupplierType>[]) => {
     const rowData = rows.map((row) => row.original);
     const csv = generateCsv(csvConfig)(rowData);
     download(csvConfig)(csv);
   };
 
-  const handleExportData = (data: Supplier[]) => {
+  const handleExportData = (data: SupplierType[]) => {
     const csv = generateCsv(csvConfig)(data);
     download(csvConfig)(csv);
   };

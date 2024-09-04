@@ -1,18 +1,22 @@
 import React from "react";
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, CircularProgress } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { LoginFormData } from "./../../interfaces/authTypes";
+import { LoginFormType } from "../../interfaces/authTypes";
 import { loginService } from "../../services/authService";
 import { notifySuccess, notifyError } from "../../utils/toastify";
 
 const LoginForm: React.FC = () => {
   const { setUser } = useAuth();
   const navigate = useNavigate();
-  const { control, handleSubmit } = useForm<LoginFormData>();
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<LoginFormType>();
 
-  const onSubmit = async (data: LoginFormData) => {
+  const onSubmit = async (data: LoginFormType) => {
     try {
       const userData = await loginService(data.username, data.password);
       setUser(userData);
@@ -60,8 +64,15 @@ const LoginForm: React.FC = () => {
           />
         )}
       />
-      <Button type="submit" variant="contained" color="primary" fullWidth>
-        Login
+      <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+        fullWidth
+        disabled={isSubmitting}
+        startIcon={isSubmitting && <CircularProgress size={24} />}
+      >
+        {isSubmitting ? "Logging in..." : "Login"}
       </Button>
     </form>
   );

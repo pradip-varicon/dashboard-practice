@@ -1,6 +1,9 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { fetchSuppliers } from "../services/supplierService";
-import { Supplier, SupplierContextType } from "../interfaces/suppliersTypes";
+import {
+  SupplierType,
+  SupplierContextType,
+} from "../interfaces/suppliersTypes";
 
 const SuppliersContext = createContext<SupplierContextType | undefined>(
   undefined
@@ -9,7 +12,7 @@ const SuppliersContext = createContext<SupplierContextType | undefined>(
 export const SuppliersProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [data, setData] = useState<Supplier[]>([]);
+  const [data, setData] = useState<SupplierType[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
