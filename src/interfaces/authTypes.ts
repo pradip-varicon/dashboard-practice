@@ -12,3 +12,10 @@ export const loginSchema = z.object({
 });
 
 export type LoginFormType = z.infer<typeof loginSchema>;
+
+export interface TextFieldControllerPropsType {
+  name: string;
+  control: any;
+  label: string;
+  type?: string;
+}
