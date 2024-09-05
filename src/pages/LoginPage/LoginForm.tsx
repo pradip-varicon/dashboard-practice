@@ -1,27 +1,11 @@
+// LoginForm.tsx
 import React from "react";
 import { Button, CircularProgress } from "@mui/material";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigate } from "react-router-dom";
-import { useLogin } from "../../hooks/useLogin";
-import { LoginFormType, loginSchema } from "../../interfaces/authTypes";
+import { useLoginForm } from "../../hooks/useLoginForm";
 import { TextFieldController } from "./TextFieldController";
 
 const LoginForm: React.FC = () => {
-  const navigate = useNavigate();
-  const { control, handleSubmit } = useForm<LoginFormType>({
-    resolver: zodResolver(loginSchema),
-  });
-
-  const { mutate, isPending } = useLogin({
-    onSuccess: () => {
-      navigate("/");
-    },
-  });
-
-  const onSubmit = (data: LoginFormType) => {
-    mutate(data);
-  };
+  const { control, handleSubmit, onSubmit, isPending } = useLoginForm();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>

@@ -4,12 +4,13 @@ import {
   REFRESH_TOKEN_KEY,
   SERVER_BASE_URL,
 } from "../constants/authConstants";
+import { LoginFormType } from "../interfaces/authTypes";
 
-export const loginService = async (username: string, password: string) => {
+export const loginService = async (data: LoginFormType) => {
   try {
     const response = await axios.post(`${SERVER_BASE_URL}/login`, {
-      username,
-      password,
+      username: data.username,
+      password: data.password,
       expiresInMins: 1,
     });
 

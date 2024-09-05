@@ -19,3 +19,7 @@ export interface TextFieldControllerPropsType {
   label: string;
   type?: string;
 }
+
+export interface UseLoginOptionsType {
+  onSuccess: () => void;
+}
