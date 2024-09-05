@@ -9,7 +9,11 @@ import { LoginFormType, loginSchema } from "../interfaces/authTypes";
 export const useLoginForm = () => {
   const navigate = useNavigate();
 
-  const { control, handleSubmit } = useForm<LoginFormType>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormType>({
     resolver: zodResolver(loginSchema),
   });
 
@@ -31,5 +35,5 @@ export const useLoginForm = () => {
     mutate(data);
   };
 
-  return { control, handleSubmit, onSubmit, isPending };
+  return { register, handleSubmit, onSubmit, errors, isPending };
 };

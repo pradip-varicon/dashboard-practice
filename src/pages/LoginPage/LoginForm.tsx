@@ -1,20 +1,31 @@
-// LoginForm.tsx
 import React from "react";
-import { Button, CircularProgress } from "@mui/material";
+import { Button, CircularProgress, TextField } from "@mui/material";
 import { useLoginForm } from "../../hooks/useLoginForm";
-import { TextFieldController } from "./TextFieldController";
 
 const LoginForm: React.FC = () => {
-  const { control, handleSubmit, onSubmit, isPending } = useLoginForm();
+  const { register, handleSubmit, onSubmit, errors, isPending } =
+    useLoginForm();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
-      <TextFieldController name="username" control={control} label="Username" />
-      <TextFieldController
-        name="password"
-        control={control}
+      <TextField
+        {...register("username")}
+        label="Username"
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        error={!!errors.username}
+        helperText={errors.username?.message}
+      />
+      <TextField
+        {...register("password")}
         label="Password"
         type="password"
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        error={!!errors.password}
+        helperText={errors.password?.message}
       />
       <Button
         type="submit"
