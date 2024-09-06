@@ -1,12 +1,11 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
-import { loginService } from "../services/authService";
-import { notifySuccess, notifyError } from "../utils/toastify";
-import { LoginFormType, loginSchema } from "../interfaces/authTypes";
+import { useAuth } from "../context/AuthContext";
+import { LoginFormType, loginSchema } from "../interfaces/LoginFormType";
 
 export const useLoginForm = () => {
+  const { login, isLoginLoading } = useAuth();
   const navigate = useNavigate();
 
   const {
@@ -17,23 +16,14 @@ export const useLoginForm = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: async (data: LoginFormType) => {
-      const userData = await loginService(data);
-      return userData;
-    },
-    onSuccess: () => {
-      notifySuccess("Logged in successfully");
-      navigate("/");
-    },
-    onError: () => {
-      notifyError("Wrong Credentials");
-    },
-  });
-
   const onSubmit = (data: LoginFormType) => {
-    mutate(data);
+    try {
+      login(data);
+      navigate("/");
+    } catch {
+      // Error handling is done in the hook
+    }
   };
 
-  return { register, handleSubmit, onSubmit, errors, isPending };
+  return { register, handleSubmit, onSubmit, isLoginLoading, errors };
 };

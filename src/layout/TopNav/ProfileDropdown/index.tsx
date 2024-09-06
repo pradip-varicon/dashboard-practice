@@ -7,12 +7,7 @@ import {
   DisabledMenuItem,
   MenuItemText,
 } from "./ProfileDropdownStyles";
-
-interface ProfileDropdownProps {
-  anchorEl: HTMLElement | null;
-  open: boolean;
-  onClose: () => void;
-}
+import { ProfileDropdownProps } from "../../Interfaces/ProfileDropdownTypes";
 
 const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
   anchorEl,
@@ -22,7 +17,7 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
   const { user, logout } = useAuth();
 
   const handleLogout = async () => {
-    await logout();
+    logout();
     onClose();
   };
 

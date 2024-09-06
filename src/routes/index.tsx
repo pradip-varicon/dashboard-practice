@@ -3,25 +3,22 @@ import {
   RouterProvider,
   Navigate,
 } from "react-router-dom";
-import LoginPage from "./pages/LoginPage";
-import ErrorPage from "./pages/ErrorPage";
-import ProtectedRoute from "./components/ProtectedRoute";
-import { AuthProvider } from "./context/AuthContext";
-import AppLayout from "./layout/AppLayout";
-import DemoPage from "./pages/DemoPage";
-import SettingsLayout from "./layout/SettingsLayout";
-import Suppliers from "./pages/Suppliers";
-import { SuppliersProvider } from "./context/SuppliersContext";
+import LoginPage from "../pages/LoginPage";
+import ErrorPage from "../pages/ErrorPage";
+import ProtectedRoute from "./ProtectedRoute";
+import AppLayout from "../layout/AppLayout";
+import DemoPage from "../pages/DemoPage";
+import SettingsLayout from "../layout/SettingsLayout";
+import Suppliers from "../pages/Suppliers";
+import { SuppliersProvider } from "../context/SuppliersContext";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <AuthProvider>
-        <ProtectedRoute>
-          <AppLayout />
-        </ProtectedRoute>
-      </AuthProvider>
+      <ProtectedRoute>
+        <AppLayout />
+      </ProtectedRoute>
     ),
     errorElement: <ErrorPage />,
     children: [
@@ -58,11 +55,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: (
-      <AuthProvider>
-        <LoginPage />
-      </AuthProvider>
-    ),
+    element: <LoginPage />,
     errorElement: <ErrorPage />,
   },
   {

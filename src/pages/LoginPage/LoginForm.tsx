@@ -3,7 +3,7 @@ import { Button, CircularProgress, TextField } from "@mui/material";
 import { useLoginForm } from "../../hooks/useLoginForm";
 
 const LoginForm: React.FC = () => {
-  const { register, handleSubmit, onSubmit, errors, isPending } =
+  const { register, handleSubmit, onSubmit, isLoginLoading, errors } =
     useLoginForm();
 
   return (
@@ -32,10 +32,10 @@ const LoginForm: React.FC = () => {
         variant="contained"
         color="primary"
         fullWidth
-        disabled={isPending}
-        startIcon={isPending && <CircularProgress size={24} />}
+        disabled={isLoginLoading}
+        startIcon={isLoginLoading && <CircularProgress size={24} />}
       >
-        {isPending ? "Logging in..." : "Login"}
+        {isLoginLoading ? "Logging in..." : "Login"}
       </Button>
     </form>
   );

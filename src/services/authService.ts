@@ -4,7 +4,7 @@ import {
   REFRESH_TOKEN_KEY,
   SERVER_BASE_URL,
 } from "../constants/authConstants";
-import { LoginFormType } from "../interfaces/authTypes";
+import { LoginFormType } from "../interfaces/LoginFormType";
 
 export const loginService = async (data: LoginFormType) => {
   try {
@@ -31,7 +31,7 @@ export const loginService = async (data: LoginFormType) => {
   }
 };
 
-export const meService = async () => {
+export const getUserInfoService = async () => {
   try {
     const token = localStorage.getItem(AUTH_TOKEN_KEY);
     const response = await axios.get(`${SERVER_BASE_URL}/me`, {
@@ -76,10 +76,4 @@ export const refreshTokenService = async () => {
       throw new Error("An unexpected error occurred: " + String(error));
     }
   }
-};
-
-export const logoutService = async () => {
-  localStorage.removeItem(AUTH_TOKEN_KEY);
-  localStorage.removeItem(REFRESH_TOKEN_KEY);
-  return true;
 };
