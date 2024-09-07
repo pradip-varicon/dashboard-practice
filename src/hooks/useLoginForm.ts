@@ -22,11 +22,11 @@ export const useLoginForm = () => {
   const loginMutation = useMutation<UserType, Error, LoginFormType>({
     mutationFn: (data: LoginFormType) => loginService(data),
     onSuccess: async (data: UserType) => {
+      console.log("before setToken");
       setTokens(data);
-      await queryClient.refetchQueries({
-        queryKey: ["checkAuth"],
-        type: "active",
-      });
+      console.log("after setToken");
+      await queryClient.invalidateQueries({ queryKey: ["checkAuth"] });
+      console.log("after invalidateQueries");
       notifySuccess("Welcome to Dashboard !");
       navigate("/suppliers");
     },
@@ -42,7 +42,7 @@ export const useLoginForm = () => {
   const logout = async () => {
     try {
       removeTokens();
-      queryClient.clear();
+
       notifySuccess("You're logged out !");
       navigate("/login");
     } catch (error) {

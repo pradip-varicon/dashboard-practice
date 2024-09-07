@@ -15,10 +15,6 @@ export const useAuthHook = () => {
   const userQuery = useQuery<UserType, Error>({
     queryKey: ["checkAuth"],
     queryFn: async () => {
-      if (!authToken || !refreshToken) {
-        throw new Error("No sessions available");
-      }
-
       try {
         return await getUserInfoService();
       } catch (error) {
@@ -34,15 +30,15 @@ export const useAuthHook = () => {
       }
     },
     enabled: !!authToken && !!refreshToken,
-    retry: false, // Disable automatic retries
+    retry: false, // disable auto retries
   });
 
   useEffect(() => {
     if (!authToken || !refreshToken) {
+      console.log("No tokenn called");
       queryClient.clear();
     }
   }, [authToken, refreshToken, queryClient]);
-
   return {
     user: userQuery.data,
     isAuthLoading: userQuery.isLoading,

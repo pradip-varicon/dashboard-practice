@@ -9,8 +9,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const { user, isAuthLoading } = useAuth();
 
-  console.log(user);
-  console.log(isAuthLoading);
+  console.log("User: ", user);
   // user and loading ko lagi state banaune
   if (isAuthLoading) {
     return (
