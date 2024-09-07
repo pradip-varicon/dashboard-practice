@@ -13,6 +13,3 @@ export const loginSchema = z.object({
 
 export type LoginFormType = z.infer<typeof loginSchema>;
 
-export interface UseLoginOptionsType {
-  onSuccess: () => void;
-}

@@ -40,8 +40,8 @@ The Varicon Dashboard is a front-end project aimed at demonstrating the implemen
 
 Before you begin, ensure you have the following installed on your machine:
 
-- **Node.js** (v14 or later)
-- **npm** (v6 or later) or **yarn**
+- **Node.js**
+- **npm**  or **yarn**
 
 ### Steps
 

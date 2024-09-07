@@ -5,19 +5,15 @@ import {
   SERVER_BASE_URL,
 } from "../constants/authConstants";
 import { LoginFormType } from "../interfaces/LoginFormType";
+import { UserType } from "../interfaces/authTypes";
 
-export const loginService = async (data: LoginFormType) => {
+export const loginService = async (data: LoginFormType): Promise<UserType> => {
   try {
     const response = await axios.post(`${SERVER_BASE_URL}/login`, {
       username: data.username,
       password: data.password,
       expiresInMins: 1,
     });
-
-    const { token, refreshToken } = response.data;
-
-    localStorage.setItem(AUTH_TOKEN_KEY, token);
-    localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
 
     return response.data;
   } catch (error: unknown) {
@@ -31,7 +27,7 @@ export const loginService = async (data: LoginFormType) => {
   }
 };
 
-export const getUserInfoService = async () => {
+export const getUserInfoService = async (): Promise<UserType> => {
   try {
     const token = localStorage.getItem(AUTH_TOKEN_KEY);
     const response = await axios.get(`${SERVER_BASE_URL}/me`, {
@@ -39,7 +35,6 @@ export const getUserInfoService = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-
     return response.data;
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
@@ -53,7 +48,7 @@ export const getUserInfoService = async () => {
   }
 };
 
-export const refreshTokenService = async () => {
+export const refreshTokenService = async (): Promise<UserType> => {
   try {
     const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
     const response = await axios.post(`${SERVER_BASE_URL}/refresh`, {
@@ -62,9 +57,7 @@ export const refreshTokenService = async () => {
     });
 
     const { token } = response.data;
-
     localStorage.setItem(AUTH_TOKEN_KEY, token);
-
     return response.data;
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
