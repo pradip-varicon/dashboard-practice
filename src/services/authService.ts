@@ -3,6 +3,7 @@ import {
   AUTH_TOKEN_KEY,
   REFRESH_TOKEN_KEY,
   SERVER_BASE_URL,
+  TOKEN_EXPIRES_IN_MINS,
 } from "../constants/authConstants";
 import { LoginFormType } from "../interfaces/LoginFormType";
 import { UserType } from "../interfaces/authTypes";
@@ -12,7 +13,7 @@ export const loginService = async (data: LoginFormType): Promise<UserType> => {
     const response = await axios.post(`${SERVER_BASE_URL}/login`, {
       username: data.username,
       password: data.password,
-      expiresInMins: 1,
+      expiresInMins: TOKEN_EXPIRES_IN_MINS,
     });
 
     return response.data;
@@ -53,7 +54,7 @@ export const refreshTokenService = async (): Promise<UserType> => {
     const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
     const response = await axios.post(`${SERVER_BASE_URL}/refresh`, {
       refreshToken,
-      expiresInMins: 1,
+      expiresInMins: TOKEN_EXPIRES_IN_MINS,
     });
 
     const { token } = response.data;

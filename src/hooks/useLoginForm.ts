@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { loginService } from "../services/authService";
 import { LoginFormType, loginSchema } from "../interfaces/LoginFormType";
 import { UserType } from "../interfaces/authTypes";
@@ -9,6 +9,7 @@ import { setTokens, removeTokens } from "../utils/tokensManagement";
 import { notifySuccess, notifyError } from "../utils/toastify";
 
 export const useLoginForm = () => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const {
     register,
@@ -20,8 +21,12 @@ export const useLoginForm = () => {
 
   const loginMutation = useMutation<UserType, Error, LoginFormType>({
     mutationFn: (data: LoginFormType) => loginService(data),
-    onSuccess: (data: UserType) => {
+    onSuccess: async (data: UserType) => {
       setTokens(data);
+      await queryClient.refetchQueries({
+        queryKey: ["checkAuth"],
+        type: "active",
+      });
       notifySuccess("Welcome to Dashboard !");
       navigate("/suppliers");
     },
@@ -37,6 +42,7 @@ export const useLoginForm = () => {
   const logout = async () => {
     try {
       removeTokens();
+      queryClient.clear();
       notifySuccess("You're logged out !");
       navigate("/login");
     } catch (error) {
