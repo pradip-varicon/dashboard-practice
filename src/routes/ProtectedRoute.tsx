@@ -1,7 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
@@ -12,11 +11,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
   console.log("User: ", user);
   // user and loading ko lagi state banaune
   if (isAuthLoading) {
-    return (
-      <Box sx={{ width: "100%" }}>
-        <LinearProgress />
-      </Box>
-    );
+    return <LinearProgress />;
   }
   if (!user) {
     return <Navigate to="/login" replace />;
