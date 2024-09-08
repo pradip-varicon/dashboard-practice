@@ -10,7 +10,7 @@ import AppLayout from "../layout/AppLayout";
 import SettingsLayout from "../layout/SettingsLayout";
 import { AuthProvider } from "../context/AuthContext";
 import { SuppliersProvider } from "../context/SuppliersContext";
-import SuspenseWrapper from "../components/SuspenseWrapper";
+import createSuspenseRoute from "./RouteWithSuspense";
 
 const Suppliers = lazy(() => import("../pages/Suppliers"));
 const ErrorPage = lazy(() => import("../pages/ErrorPage"));
@@ -26,162 +26,45 @@ const router = createBrowserRouter([
         </ProtectedRoute>
       </AuthProvider>
     ),
-    errorElement: (
-      <SuspenseWrapper>
-        <ErrorPage />
-      </SuspenseWrapper>
-    ),
+    errorElement: createSuspenseRoute("*", <ErrorPage />).element,
     children: [
       { index: true, element: <Navigate to="suppliers" replace /> },
-      {
-        path: "overview",
-        element: (
-          <SuspenseWrapper>
-            <DemoPage />
-          </SuspenseWrapper>
-        ),
-      },
-      {
-        path: "sales-orders",
-        element: (
-          <SuspenseWrapper>
-            <DemoPage />
-          </SuspenseWrapper>
-        ),
-      },
-      {
-        path: "inventory",
-        element: (
-          <SuspenseWrapper>
-            <DemoPage />
-          </SuspenseWrapper>
-        ),
-      },
+      createSuspenseRoute("overview", <DemoPage />),
+      createSuspenseRoute("sales-orders", <DemoPage />),
+      createSuspenseRoute("inventory", <DemoPage />),
       {
         path: "suppliers",
         element: (
-          <SuspenseWrapper>
-            <SuppliersProvider>
-              <Suppliers />
-            </SuppliersProvider>
-          </SuspenseWrapper>
+          <SuppliersProvider>
+            {createSuspenseRoute("suppliers", <Suppliers />).element}
+          </SuppliersProvider>
         ),
       },
-      {
-        path: "purchase-orders",
-        element: (
-          <SuspenseWrapper>
-            <DemoPage />
-          </SuspenseWrapper>
-        ),
-      },
-      {
-        path: "deliveries",
-        element: (
-          <SuspenseWrapper>
-            <DemoPage />
-          </SuspenseWrapper>
-        ),
-      },
-      {
-        path: "customers",
-        element: (
-          <SuspenseWrapper>
-            <DemoPage />
-          </SuspenseWrapper>
-        ),
-      },
-      {
-        path: "invoices",
-        element: (
-          <SuspenseWrapper>
-            <DemoPage />
-          </SuspenseWrapper>
-        ),
-      },
-      {
-        path: "reports",
-        element: (
-          <SuspenseWrapper>
-            <DemoPage />
-          </SuspenseWrapper>
-        ),
-      },
-      {
-        path: "analytics",
-        element: (
-          <SuspenseWrapper>
-            <DemoPage />
-          </SuspenseWrapper>
-        ),
-      },
+      createSuspenseRoute("purchase-orders", <DemoPage />),
+      createSuspenseRoute("deliveries", <DemoPage />),
+      createSuspenseRoute("customers", <DemoPage />),
+      createSuspenseRoute("invoices", <DemoPage />),
+      createSuspenseRoute("reports", <DemoPage />),
+      createSuspenseRoute("analytics", <DemoPage />),
       {
         path: "settings",
         element: <SettingsLayout />,
         children: [
-          {
-            path: "product-categories",
-            element: (
-              <SuspenseWrapper>
-                <DemoPage />
-              </SuspenseWrapper>
-            ),
-          },
-          {
-            path: "user-roles",
-            element: (
-              <SuspenseWrapper>
-                <DemoPage />
-              </SuspenseWrapper>
-            ),
-          },
-          {
-            path: "tax-settings",
-            element: (
-              <SuspenseWrapper>
-                <DemoPage />
-              </SuspenseWrapper>
-            ),
-          },
-          {
-            path: "company-info",
-            element: (
-              <SuspenseWrapper>
-                <DemoPage />
-              </SuspenseWrapper>
-            ),
-          },
-          {
-            path: "billing-invoices",
-            element: (
-              <SuspenseWrapper>
-                <DemoPage />
-              </SuspenseWrapper>
-            ),
-          },
+          createSuspenseRoute("product-categories", <DemoPage />),
+          createSuspenseRoute("user-roles", <DemoPage />),
+          createSuspenseRoute("tax-settings", <DemoPage />),
+          createSuspenseRoute("company-info", <DemoPage />),
+          createSuspenseRoute("billing-invoices", <DemoPage />),
         ],
       },
     ],
   },
   {
-    path: "*",
-    element: (
-      <SuspenseWrapper>
-        <ErrorPage />
-      </SuspenseWrapper>
-    ),
-  },
-  {
     path: "/login",
     element: (
       <AuthProvider>
-        <LoginPage />
+        {createSuspenseRoute("/login", <LoginPage />).element}
       </AuthProvider>
-    ),
-    errorElement: (
-      <SuspenseWrapper>
-        <ErrorPage />
-      </SuspenseWrapper>
     ),
   },
 ]);
