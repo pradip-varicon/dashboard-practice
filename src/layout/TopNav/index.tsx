@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import { Typography } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import { useLocation } from "react-router-dom";
@@ -13,7 +13,9 @@ import {
 } from "./TopNavStyles";
 import { useAuth } from "../../context/AuthContext";
 import { headings } from "../constants";
-import ProfileDropdown from "./ProfileDropdown";
+import LoadingSpinner from "../../components/LoadingSpinner";
+
+const ProfileDropdown = lazy(() => import("./ProfileDropdown"));
 
 const TopNav: React.FC = () => {
   const location = useLocation();
@@ -54,12 +56,13 @@ const TopNav: React.FC = () => {
           </ProfileContainer>
         </StyledToolbar>
       </StyledAppBar>
-
-      <ProfileDropdown
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      />
+      <Suspense fallback={<LoadingSpinner />}>
+        <ProfileDropdown
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        />
+      </Suspense>
     </>
   );
 };

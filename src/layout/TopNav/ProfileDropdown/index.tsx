@@ -1,28 +1,25 @@
 import React from "react";
 import { Typography, Divider, MenuItem } from "@mui/material";
-import { useAuth } from "../../../context/AuthContext";
 import { Edit as EditIcon, ExitToApp as LogoutIcon } from "@mui/icons-material";
 import {
   StyledMenu,
   DisabledMenuItem,
   MenuItemText,
 } from "./ProfileDropdownStyles";
-
-interface ProfileDropdownProps {
-  anchorEl: HTMLElement | null;
-  open: boolean;
-  onClose: () => void;
-}
+import { ProfileDropdownProps } from "../../Interfaces/ProfileDropdownTypes";
+import { useAuth } from "../../../context/AuthContext";
+import { useLoginForm } from "../../../hooks/useLoginForm";
 
 const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
   anchorEl,
   open,
   onClose,
 }) => {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
+  const { logout } = useLoginForm();
 
   const handleLogout = async () => {
-    await logout();
+    logout();
     onClose();
   };
 

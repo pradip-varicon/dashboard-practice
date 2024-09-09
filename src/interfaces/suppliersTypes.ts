@@ -1,4 +1,4 @@
-export type Supplier = {
+export type SupplierType = {
   id: number;
   "Accounting Code": string;
   Description: string;
@@ -9,6 +9,6 @@ export type Supplier = {
 };
 
 export type SupplierContextType = {
-  data: Supplier[];
+  data: SupplierType[];
   loading: boolean;
 };

@@ -1,7 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import Routes from "./routes";
-import "./index.css";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
 import { ToastContainer, Flip } from "react-toastify";
