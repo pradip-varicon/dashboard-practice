@@ -22,11 +22,8 @@ export const useLoginForm = () => {
   const loginMutation = useMutation<UserType, Error, LoginFormType>({
     mutationFn: (data: LoginFormType) => loginService(data),
     onSuccess: async (data: UserType) => {
-      console.log("before setToken");
       setTokens(data);
-      console.log("after setToken");
       await queryClient.invalidateQueries({ queryKey: ["checkAuth"] });
-      console.log("after invalidateQueries");
       notifySuccess("Welcome to Dashboard !");
       navigate("/suppliers");
     },

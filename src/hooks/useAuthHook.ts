@@ -18,7 +18,10 @@ export const useAuthHook = () => {
       try {
         return await getUserInfoService();
       } catch (error) {
-        console.error("Sessions expired, attempting to refresh sessions...");
+        console.error(
+          "Sessions expired, attempting to refresh sessions...",
+          error
+        );
 
         try {
           await refreshTokenService();

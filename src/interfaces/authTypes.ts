@@ -1,5 +1,5 @@
 export interface UserType {
-  token: string;
+  accessToken: string;
   refreshToken: string;
   id: number;
   username: string;

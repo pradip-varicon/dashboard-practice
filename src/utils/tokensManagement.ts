@@ -3,7 +3,7 @@ import { UserType } from "../interfaces/authTypes";
 
 export const setTokens = (tokens: UserType) => {
   try {
-    localStorage.setItem(AUTH_TOKEN_KEY, tokens.token);
+    localStorage.setItem(AUTH_TOKEN_KEY, tokens.accessToken);
     localStorage.setItem(REFRESH_TOKEN_KEY, tokens.refreshToken);
   } catch (error) {
     console.error("Error setting tokens:", error);
